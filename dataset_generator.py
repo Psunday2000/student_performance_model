@@ -20,11 +20,11 @@ def generate_student_data_balanced(num_students):
             # Generate random values for all factors
             age = random.randint(18, 25)
             gender = random.choice(['Male', 'Female'])
-            marital_status = random.choice(['Single', 'Married', 'Divorced', 'Widowed'])
+            marital_status = random.choice(['Single', 'Married', 'Engaged'])
             children = random.randint(0, 5) if marital_status == 'Married' else 0
             mother_education = random.choice(['High School', 'College', "Bachelor's Degree", "Master's Degree", 'Doctorate'])
             father_education = random.choice(['High School', 'College', "Bachelor's Degree", "Master's Degree", 'Doctorate'])
-            guardian = fake.name()
+            relationship_with_student = random.choice(['Father', 'Mother', 'Brother', 'Sister', 'Uncle', 'Aunty'])
             extracurricular_activities = random.choice(['Yes', 'No'])
             online_time = random.randint(0, 24)
             family_relationship = random.choice(['Good', 'Average', 'Poor'])
@@ -89,7 +89,7 @@ def generate_student_data_balanced(num_students):
                 'Children (if Married)': children,
                 'Mother Education': mother_education,
                 'Father Education': father_education,
-                'Guardian (Sponsor)': guardian,
+                'Relationship with Student': relationship_with_student,
                 'Extracurricular Activities': extracurricular_activities,
                 'Online Time (Daily)': online_time,
                 'Family Relationship': family_relationship,
@@ -113,4 +113,3 @@ with open('student_data_test_balanced.csv', mode='w', newline='') as file:
         writer.writerow(student)
 
 print("Generated balanced student data for training saved to student_data_test_balanced.csv")
-
