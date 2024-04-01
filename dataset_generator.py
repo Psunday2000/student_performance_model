@@ -32,57 +32,52 @@ def generate_student_data_balanced(num_students):
             alcoholic_consumption = random.choice(['Low', 'Moderate', 'High'])
             religious_programs = random.randint(0, 7)
             computer_access = random.choice(['Yes', 'No'])
-            
-            # Match factors with grades
-            if grade in ['A', 'B']:
-                extracurricular_activities = 'Yes'
-                online_time = random.randint(2, 8)
-                free_time_activities = random.choice(['Sports', 'Reading'])
-                alcoholic_consumption = random.choice(['Low', 'Moderate'])
-                computer_access = 'Yes'
-            elif grade in ['C', 'D']:
-                extracurricular_activities = 'No'
-                online_time = random.randint(0, 3)
-                free_time_activities = random.choice(['Reading', 'Watching TV', 'Sports'])
-                alcoholic_consumption = random.choice(['Low', 'Moderate'])
-                computer_access = random.choice(['Yes', 'No'])
-            else:
-                extracurricular_activities = 'No'
-                online_time = 0
-                free_time_activities = 'Watching TV'
-                alcoholic_consumption = 'High'
-                computer_access = 'No'
-                
-            # Assign weights based on grade
-            total_score = random.uniform(0, 100)
-            total_weight = [0.1, 0.2, 0.3, 0.2, 0.2]  # Initial weight for each parameter
-            if grade == 'A':
-                total_weight = [0.15, 0.25, 0.35, 0.15, 0.1]
-            elif grade == 'B':
-                total_weight = [0.1, 0.2, 0.3, 0.2, 0.2]
-            elif grade == 'C':
-                total_weight = [0.05, 0.15, 0.25, 0.25, 0.3]
-            elif grade == 'D':
-                total_weight = [0.05, 0.1, 0.2, 0.3, 0.35]
-            elif grade == 'E':
-                total_weight = [0.05, 0.05, 0.1, 0.3, 0.5]
-            elif grade == 'F':
-                total_weight = [0.05, 0.05, 0.05, 0.2, 0.65]
 
-            # Calculate scores based on weights
-            attendance = round(total_score * total_weight[0], 1)
-            assignment_completion = round(total_score * total_weight[1], 1)
-            test_score = round(total_score * total_weight[2], 1)
-            practical_score = round(total_score * total_weight[3], 1)
-            exam_score = round(total_score * total_weight[4], 1)
+            # Generate scores for test, practical, and exam
+            test_score = random.randint(0, 10)
+            practical_score = random.randint(0, 30)
+            exam_score = random.randint(0, 60)
+
+            # Calculate total score
+            total_score = test_score + practical_score + exam_score
+
+            # Determine performance based on total score
+            if total_score >= 70:
+                performance = 'A'
+            elif total_score >= 60:
+                performance = 'B'
+            elif total_score >= 50:
+                performance = 'C'
+            elif total_score >= 40:
+                performance = 'D'
+            elif total_score >= 30:
+                performance = 'E'
+            else:
+                performance = 'F'
+
+             # Generate random percentage scores for attendance and assignment completion
+            # attendance = random.randint(0, 100)
+            # assignment_completion = random.randint(0, 100)
+
+            # Adjust attendance and assignment completion based on grade
+            if performance in ['A', 'B', 'C']:
+                attendance = random.randint(75, 99)
+                assignment_completion = random.randint(75, 99)
+            elif performance in ['D', 'E']:
+                attendance = random.randint(60, 75)
+                assignment_completion = random.randint(60, 75)
+            else:
+                attendance = random.randint(0, 40)
+                assignment_completion = random.randint(0, 40)
 
             student_data.append({
                 'Attendance (%)': attendance,
                 'Assignment Completion (%)': assignment_completion,
-                'Test Score (25%)': test_score,
-                'Practical Score (25%)': practical_score,
-                'Exam Score (50%)': exam_score,
-                'Total Grade': grade,
+                'Test Score (10%)': test_score,
+                'Practical Score (30%)': practical_score,
+                'Exam Score (60%)': exam_score,
+                'Total Score': total_score,
+                'Performance': performance,
                 'Age': age,
                 'Gender': gender,
                 'Marital Status': marital_status,
@@ -101,7 +96,7 @@ def generate_student_data_balanced(num_students):
 
     return student_data
 
-# Generate 100,000 student records for training with balanced grades
+# Generate 5000 student records for training with balanced grades
 num_students_train = 5000
 student_data_test_balanced = generate_student_data_balanced(num_students_train)
 
