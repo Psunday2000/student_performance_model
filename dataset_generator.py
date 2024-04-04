@@ -63,7 +63,7 @@ def generate_student_data_balanced(num_students):
             'Test Score (25%)': test_score,
             'Practical Score (25%)': practical_score,
             'Exam Score (50%)': exam_score,
-            'Total Score (100%)': total_score,
+            # 'Total Score (100%)': total_score,
             'Performance': performance,
             'Age': age,
             'Gender': gender,
@@ -83,8 +83,8 @@ def generate_student_data_balanced(num_students):
 
     return student_data
 
-# Generate 100,000 student records for training with balanced performances
-num_students_test = 20000
+# Generate 5,000 student records for training with balanced performances
+num_students_test = 5000
 student_data_test = generate_student_data_balanced(num_students_test)
 
 # Save the balanced training data to a CSV file
